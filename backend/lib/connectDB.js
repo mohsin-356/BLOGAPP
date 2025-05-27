@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-async function connectToDatabase() {
+async function connectDB() {
     try {
         await mongoose.connect(process.env.DB_CONNECT);
         console.log('✅ Connected to database successfully');
@@ -8,4 +8,4 @@ async function connectToDatabase() {
     }
 }
 
-export default connectToDatabase;
+export default connectDB;
