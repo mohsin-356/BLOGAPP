@@ -1,10 +1,14 @@
 import express from 'express';
-import userRoutes from './routes/user.route.js';
+import userRouter from './routes/user.route.js';
+import postRouter from './routes/post.route.js';
+import commentRouter from './routes/comment.route.js';
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
-app.use('/users', userRoutes);
+app.use('/users', userRouter);
+app.use('/posts', postRouter);
+app.use('/comments', commentRouter);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
