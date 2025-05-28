@@ -1,4 +1,5 @@
 import Post from "../models/post.model.js";
+
 export const getPosts = async (req, res) => {
     try {
         const posts = await Post.find();
@@ -26,8 +27,8 @@ export const createPost = async (req, res) => {
     try {
         const newPost = new Post(req.body);
         const post=await newPost.save();
-        res.status(201).json(post);
+        return res.status(201).json(post);
     } catch (error) {
-        res.status(500).json({ message: "Error creating post" });
+        return res.status(500).json({ message: "Error creating post" });
     }
 }

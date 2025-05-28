@@ -6,9 +6,9 @@ import connectDB from './lib/connectDB.js';
 import dotenv from 'dotenv';
 dotenv.config();
 const app = express();
+app.use(express.json());
 const PORT = process.env.PORT || 3000;
 
-app.use(express.json());
 app.use('/users', userRouter);
 app.use('/posts', postRouter);
 app.use('/comments', commentRouter);
