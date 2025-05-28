@@ -1,14 +1,5 @@
-import Post from "../models/post.model.js";
 import express from "express";
 const router = express.Router();
-
-router.get("/P-TEST", async (req, res) => {
-  try {
-    const posts = await Post.find();
-    res.status(200).send(posts);
-  } catch (error) {
-    res.status(500).send("<h1>Internal Server Error</h1>");
-  }
-});
-
+import { getPosts } from "../controllers/post.controller.js";
+router.get("/P-TEST",getPosts);
 export default router;
