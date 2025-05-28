@@ -9,9 +9,16 @@ export const getPosts = async (req, res) => {
 }
 export const getPost=async (req,res) => {
     try {
-        const { slug } = req.params.slug;
+        const  slug  = req.params.slug;
+        if (!slug) {
+            return res.status(400).json({ message: "Slug is required" });
+        }
         const post = await Post.findOne({ slug: slug });
+        if (!post) {
+            return res.status(404).json({ message: "Post not found" });
+        }
+        res.status(200).json(post);
     } catch (error) {
-        res.status(500).json({ message: "Error fetching posts" });
+        res.status(500).json({ message: "Error fetching post" });
     }
 }
