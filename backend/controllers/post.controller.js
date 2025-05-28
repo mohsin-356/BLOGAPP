@@ -22,3 +22,16 @@ export const getPost=async (req,res) => {
         res.status(500).json({ message: "Error fetching post" });
     }
 }
+export const createPost = async (req, res) => {
+    try {
+        // const { title, content, slug } = req.body;
+        // if (!title || !content || !slug) {
+        //     return res.status(400).json({ message: "Title, content, and slug are required" });
+        // }
+        const newPost = new Post(req.body);
+        const post=await newPost.save();
+        res.status(201).json(post);
+    } catch (error) {
+        res.status(500).json({ message: "Error creating post" });
+    }
+}
