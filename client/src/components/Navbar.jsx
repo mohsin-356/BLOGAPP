@@ -1,11 +1,17 @@
 import React, { useState } from 'react';
 import ShowImage from './ShowImage';
 import { Link } from 'react-router-dom';
-import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton } from '@clerk/clerk-react';
+import { SignedIn, SignedOut, SignInButton, SignUpButton, useAuth, UserButton } from '@clerk/clerk-react';
+import { useEffect } from 'react';
 
 const Navbar = () => {
     const [open, setOpen] = useState(false);
-
+    const {getToken}=useAuth();
+    useEffect(()=>{
+        getToken().then((token)=>{
+            console.log("Token:", token);
+        })
+    }, []);
     return (
         <div className='w-full h-16 md:h-20 flex items-center justify-between'>
             {/* LOGO */}
