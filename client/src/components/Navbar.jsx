@@ -6,9 +6,9 @@ import { useEffect } from 'react';
 
 const Navbar = () => {
     const [open, setOpen] = useState(false);
-    const {getToken}=useAuth();
-    useEffect(()=>{
-        getToken().then((token)=>{
+    const { getToken } = useAuth();
+    useEffect(() => {
+        getToken().then((token) => {
             console.log("Token:", token);
         })
     }, []);
