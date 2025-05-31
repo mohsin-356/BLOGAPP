@@ -4,6 +4,7 @@ import Comment from "../models/comment.model.js";
 import { Webhook } from "svix";
 export const clerkWebHook = async (req, res) => 
 {
+    // console.log("Webhook received");
   const WEBHOOK_SECRET = process.env.CLERK_WEBHOOK_SECRET;
   if (!WEBHOOK_SECRET)
   {
@@ -37,7 +38,7 @@ export const clerkWebHook = async (req, res) =>
         });
         await newUser.save();
     }
-    
+
     if (evt.type === "user.deleted")
     {
         const deletedUser = await User.findOneAndDelete({
