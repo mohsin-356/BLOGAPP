@@ -23,13 +23,13 @@ app.use('/webhooks', webhookRouter);
 // res.json(authState);
 // });
 
-app.use('/protect', requireAuth(), (req, res) => {
-  const { userId } = req.auth();
-  if (!userId) {
-    return res.status(401).json({ message: 'Unauthorized' });
-  }
-  res.status(200).json({ message: `Protected route accessed by user ${userId}`, });
-});
+// app.use('/protect', requireAuth(), (req, res) => {
+//   const { userId } = req.auth();
+//   if (!userId) {
+//     return res.status(401).json({ message: 'Unauthorized' });
+//   }
+//   res.status(200).json({ message: `Protected route accessed by user ${userId}`, });
+// });
 app.use((error, req, res, next) => {
   res.status(error.status || 500);
 res.json({
