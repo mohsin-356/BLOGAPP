@@ -1,10 +1,22 @@
 import express from 'express';
-import { clerkWebHook } from '../controllers/webhook.controller.js'; // ✅ Added .js extension
+import { clerkWebHook } from '../controllers/webhook.controller.js';
 import bodyParser from 'body-parser';
 
 const router = express.Router();
 
-router.post('/clerk', bodyParser.raw({ type: 'application/json' }),clerkWebHook); 
-// router.post('/clerk',clerkWebHook); 
+const rawBodyMiddleware = bodyParser.raw({ type: 'application/json' });
+
+router.post('/clerk', rawBodyMiddleware, (req, res, next) => {
+  try {
+    // Convert raw body to JSON
+    if (req.body) {
+      req.body = JSON.parse(req.body.toString());
+    }
+    next();
+  } catch (error) {
+    console.error('Error parsing webhook body:', error);
+    res.status(400).json({ message: 'Invalid JSON payload' });
+  }
+}, clerkWebHook);
 
 export default router;
