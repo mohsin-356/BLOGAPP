@@ -43,23 +43,27 @@ export const createPost = async (req, res) => {
 };
 export const deletePost = async (req, res) => {
   try {
-    const clerkUserId = req.auth().userId;
-    if (!clerkUserId) {
-      return res.status(401).json({ message: "Unauthorized" });
-    }
-    const user = await User.findOne({ clerkUserId });
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
-    }
+    // const clerkUserId = req.auth().userId;
+    // if (!clerkUserId) {
+    //   return res.status(401).json({ message: "Unauthorized" });
+    // }
+    // const user = await User.findOne({ clerkUserId });
+    console.log("\n");
+    // console.log("User found:", user._id);
+    console.log("\n");
+    // if (!user) {
+    //   return res.status(404).json({ message: "User not found" });
+    // }
     const post = await Post.findOneAndDelete({
       _id: req.params.id,
-      user: user._id,
+      // user: user._id,
     });
     if (!post) {
       return res.status(404).json({ message: "Post not found" });
     }
     return res.status(200).json({ message: "Post deleted successfully" });
   } catch (error) {
+    console.error("Error deleting post:", error);
     return res.status(500).json({ message: "Error deleting post" });
   }
 };
